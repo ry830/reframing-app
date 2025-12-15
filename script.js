@@ -4,7 +4,7 @@
 // ⚠️ このコードはバックエンドAPIのURLと認証トークンの仕組みを前提とします。
 // 実際の利用には、バックエンドサーバーの構築が必要です。
 
-const BASE_API_URL = 'http://localhost:3000/api'; // 構築するサーバーのURLに置き換える
+const BASE_API_URL = 'https://reframing-app-api.onrender.com/api'; // 構築するサーバーのURLに置き換える
 const RECORD_ENDPOINT = `${BASE_API_URL}/records`;
 const AUTH_ENDPOINT = `${BASE_API_URL}/auth`;
 
@@ -78,7 +78,7 @@ async function getRecords() {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/api/records/get', {
+        const response = await fetch('https://reframing-app-api.onrender.com/api/records/get', {
             method: 'GET',
             headers: {
                 // 3. 認証ヘッダーで authToken を使用

@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // グローバル変数とDOM要素の取得
     // ------------------------------------
 
-    const SERVER_BASE_URL = 'http://localhost:3000';
+    const SERVER_BASE_URL = 'https://reframing-app-api.onrender.com';
 
     const factTextarea = document.getElementById('factTextarea');
     const emotionTextarea = document.getElementById('emotionTextarea');

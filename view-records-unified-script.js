@@ -335,7 +335,7 @@ if (clearAllButton) {
                 }
 
                 // 新しい API エンドポイントを呼び出す
-                const response = await fetch('http://localhost:3000/api/records/clear-all', {
+                const response = await fetch('https://reframing-app-api.onrender.com/api/records/clear-all', {
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${authToken}`

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMessage = document.getElementById('errorMessage');
 
     // サーバー認証用のエンドポイント (Port 3000のバックエンドを参照)
-    const AUTH_ENDPOINT = 'http://localhost:3000/api/auth'; 
+    const AUTH_ENDPOINT = 'https://reframing-app-api.onrender.com/api/auth'; 
 
     // --- ユーティリティ関数 ---
     function showForm(formType) {
