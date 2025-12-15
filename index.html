@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レジリエンス力向上のお部屋</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <style>
+        /* (CSS Styles are omitted for brevity, they should remain in style.css or your current file) */
+        /* ... (ここに全てのCSSスタイルを含める) ... */
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        .dashboard-item-card { background-color: #ffffff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); text-align: center; }
+        .dashboard-item-card h4 { color: #5c6bc0; font-size: 1.2rem; margin-bottom: 10px; }
+        .dashboard-value { font-weight: 700; color: #e91e63; font-size: 2.2rem; display: block; margin-top: 5px; }
+        /* Lucky Meter Bar */
+        /* ★削除: Lucky Meter Bar のスタイルを削除 */
+        /* Calendar Placeholder */
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+        .calendar-day { padding: 8px 0; border-radius: 5px; background-color: #f0f0f0; color: #666; font-size: 0.9em; }
+        .calendar-day.today { background-color: #bbdefb; color: #3f51b5; font-weight: bold; }
+        .calendar-day.has-record { background-color: #a5d6a7; color: #388e3c; font-weight: bold; }
+        .calendar-day.weekend { color: #e91e63; }
+        .calendar-header { font-weight: bold; color: #333; padding-bottom: 5px; border-bottom: 1px solid #eee; }
+        /* Menu items */
+        .menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
+        .menu-item { display: flex; align-items: center; padding: 20px; border-radius: 8px; text-decoration: none; color: #ffffff; font-weight: 600; font-size: 1.2rem; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }
+        .menu-item:hover { transform: translateY(-5px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); }
+        .menu-item .icon { font-size: 2rem; margin-right: 15px; }
+        .menu-item.blue { background-color: #2196f3; }
+        .menu-item.dark { background-color: #555; }
+        .menu-item.grey { background-color: #9e9e9e; }
+        .menu-item.dark.grey { background-color: #607d8b; }
+        .back-to-home { display: block; text-align: center; margin-top: 40px; padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; color: #666; text-decoration: none; transition: background-color 0.2s; }
+        .back-to-home:hover { background-color: #f0f0f0; }
+        /* Modal Styles */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); }
+        .modal-content { background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 600px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .close-button { color: #aaa; float: right; font-size: 28px; font-weight: bold; }
+        .close-button:hover, .close-button:focus { color: #000; text-decoration: none; cursor: pointer; }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💘 レジリエンス力向上のお部屋 🌒</h1>
+            <p>人生をより充実させていくために心の筋トレを行いましょう🤩</p>
+        </header>
+
+        <div class="top-nav-controls" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <button id="howToUseButton" class="button-primary" style="background-color: #3498db; border-color: #3498db; font-size: 0.9rem;">
+                使い方
+            </button>
+            <button id="logoutButton" class="button-primary" style="background-color: #e74c3c; border-color: #e74c3c; font-size: 0.9rem;">
+                ログアウト
+            </button>
+        </div>
+
+        <div id="howToUseModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h3>使い方 </h3>
+                <p>このアプリでは、主にリフレーミング機能を使って、日常生活でネガティブな場面に遭遇した際に思考をポジティブに変えていくためのトレーニングを行います。</p>
+                <h4> リフレーミングトレーニング</h4>
+                <p>この機能を用いてトレーニングを行います。このトレーニングを繰り返すことで、ネガティブな考え方のクセを矯正し、最終的に心の回復力（レジリエンス）を高めることを目的としています。</p>
+                <h4> 記録の振り返り</h4>
+                <p>過去に行ったトレーニング記録を一覧で確認し、記録を振り返ることができます。</p>
+                <h4> 成長可視化ダッシュボード</h4>
+                <p>カレンダー上で記録をした日が閲覧できます。日々の成長を視覚的に確認できます。</p>
+            </div>
+        </div>
+
+        <main class="main-content">
+            <section class="dashboard-section">
+                <h2>📊 成長可視化ダッシュボード</h2>
+                <div class="dashboard-grid">
+                    
+                    <div class="dashboard-item-card">
+                        <h4>記録カレンダー</h4>
+                        <div id="calendarNavContainer" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            </div>
+                        <div class="calendar-grid" id="recordCalendar">
+                            </div>
+                        <p style="font-size: 0.8rem; color: #888; margin-top: 5px;">（記録を行った日を表示）</p>
+                    </div>
+
+                    <div class="dashboard-item-card">
+                        <h4>リフレーミング回数</h4>
+                        <span id="totalMindRecords" class="dashboard-value">0回</span>
+                        <p style="font-size: 0.8rem; color: #888; margin-top: 5px;"></p>
+                    </div>
+                    
+                    </div>
+            </section>
+
+            <nav class="menu">
+                <a href="mind-recorder.html" class="menu-item blue" style="padding: 30px; font-size: 1.6rem; font-weight: 700;">
+                    <span class="icon">🧠</span>
+                    リフレーミングトレーニング
+                </a>
+                <a href="view-records-unified.html" class="menu-item dark grey" style="padding: 30px; font-size: 1.6rem; font-weight: 700;">
+                    <span class="icon">📜</span>
+                    記録の振り返り
+                </a>
+            </nav>
+        </main>
+    </div>
+
+    <script>
+        // ------------------------------------
+        // ログアウト機能
+        // ------------------------------------
+        const logoutButton = document.getElementById('logoutButton');
+        if (logoutButton) {
+            logoutButton.addEventListener('click', () => {
+                localStorage.removeItem('authToken'); // トークンを削除
+                localStorage.removeItem('currentUserId'); // IDを削除
+                window.location.href = 'auth.html'; // 認証画面へ戻る
+            });
+        }
+
+// ------------------------------------
+// ★★★ 修正箇所：日付をローカルタイム基準で YYYY-MM-DD に変換する関数 ★★★
+// ------------------------------------
+function toYMD_Local(isoString) { // 関数名を toYMD_Local に変更して、グローバルな toYMD と区別
+    if (!isoString) return null;
+
+    // ISO文字列からDateオブジェクトを作成
+    const dateObj = new Date(isoString);
+
+    // Dateオブジェクトのローカルメソッドを使用して、年/月/日を取得
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+}
+        
+        // ------------------------------------
+        // DOMContentLoaded のリスナーを async に変更し、全ロジックを統合
+        // ------------------------------------
+        document.addEventListener('DOMContentLoaded', async () => { 
+
+            // ★★★ 認証チェックを最初に実行し、無効な場合は即座に中断 ★★★
+            const authToken = localStorage.getItem('authToken'); 
+            if (!authToken) {
+                // トークンがない場合、ログアウト処理が別途動くため、ここでは何もしない。
+                // ただし、念のためwindow.location.href = 'auth.html'; は残す。
+                window.location.href = 'auth.html';
+                return; // ここで処理を中断
+            }
+
+            // ------------------------------------
+            // 共通の定数とユーティリティ
+            // ------------------------------------
+            // ★削除: 思考評価ポイントを削除
+            const intensityPoints = { 'low': 0, 'medium': 1, 'high': 2 };
+            // ★削除: 猫のステージ定義を削除
+
+            const toYMD = (isoString) => toYMD_Local(isoString); // ★この行を新たに追加/修正★
+            const isConsecutive = (date1, date2) => {
+                const d1 = new Date(date1);
+                const d2 = new Date(date2);
+                const oneDay = 24 * 60 * 60 * 1000;
+                const diff = Math.abs(d1.setUTCHours(0, 0, 0, 0) - d2.setUTCHours(0, 0, 0, 0));
+                return diff === oneDay;
+            };
+            
+            // ------------------------------------
+            // 画面遷移関数
+            // ------------------------------------
+            function goToRecordsByDate(isoDate) {
+                localStorage.setItem('filterDate', isoDate);
+                window.location.href = 'view-records-unified.html';
+            }
+
+            // ------------------------------------
+            // 記録カレンダー関数 (現状の月表示のみ)
+            // ------------------------------------
+            function generateRecordCalendar(allRecords) {
+                const recordCalendarElement = document.getElementById('recordCalendar');
+                if (!recordCalendarElement) return;
+
+                recordCalendarElement.innerHTML = '';
+                const today = new Date();
+                const currentMonth = today.getMonth();
+                const currentYear = today.getFullYear();
+                const recordDates = new Set();
+                allRecords.forEach(r => {
+                    const dateSource = r.date;
+                    if (dateSource) { 
+                        // YYYY-MM-DD 形式の文字列をセットに格納
+                        recordDates.add(toYMD(dateSource));
+                    }
+                });
+                // 曜日ヘッダーを描画
+                const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
+                weekdays.forEach(day => {
+                    const header = document.createElement('div');
+                    header.className = 'calendar-day calendar-header';
+                    header.textContent = day;
+                    recordCalendarElement.appendChild(header);
+                });
+
+                const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
+                const startingDay = firstDayOfMonth.getDay();
+                for (let i = 0; i < startingDay; i++) {
+                    const emptyDay = document.createElement('div');
+                    emptyDay.className = 'calendar-day';
+                    recordCalendarElement.appendChild(emptyDay);
+                }
+
+                const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+                for (let i = 1; i <= daysInMonth; i++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'calendar-day';
+                    dayElement.textContent = i;
+
+                    const dateToCheck = new Date(currentYear, currentMonth, i);
+                    const dateString = dateToCheck.toDateString();
+                    const isoDate = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                    
+                    if (dateString === today.toDateString()) {
+                        dayElement.classList.add('today');
+                    }
+                    
+                    if (recordDates.has(isoDate)) {
+                        dayElement.classList.add('has-record');
+                        dayElement.classList.add('clickable-date');
+                        dayElement.dataset.isoDate = isoDate;
+                        dayElement.addEventListener('click', () => {
+                            goToRecordsByDate(isoDate);
+                        });
+                    }
+                    
+                    if (dateToCheck.getDay() === 0 || dateToCheck.getDay() === 6) { 
+                        dayElement.classList.add('weekend');
+                    }
+                    
+                    recordCalendarElement.appendChild(dayElement);
+                }
+            }
+            
+            // ------------------------------------
+            // メイン処理 (updateDashboard)
+            // ------------------------------------
+            async function updateDashboard() { 
+                // ★ getRecords() は script.js に定義されている必要があります
+                const allUserRecords = await getRecords(); 
+
+                const mindRecords = allUserRecords.filter(r => r.type === 'mindRecord');
+                const positiveRecords = allUserRecords.filter(r => r.type === 'positive');
+                const meditationRecords = allUserRecords.filter(r => r.type === 'meditation');
+                
+                let totalScore = 0;
+                
+                // --- 1. ポジティブ日記のスコア計算 --- (処理は残すが、スコアは利用しない)
+                const positiveDays = {}; 
+                positiveRecords.forEach(r => {
+                    const dateKey = toYMD(r.date);
+                    if (!positiveDays[dateKey]) { positiveDays[dateKey] = { base: 0, bonus: 0, intensity: 0, rawRecords: [] }; }
+                    positiveDays[dateKey].rawRecords.push(r);
+                });
+
+                const sortedDates = Object.keys(positiveDays).sort();
+                let consecutiveDays = 0;
+                let lastDate = null;
+                
+                for (const dateKey of sortedDates) {
+                    const records = positiveDays[dateKey];
+                    records.base = 5;
+                    const maxIntensity = records.rawRecords.reduce((max, r) => 
+                        Math.max(max, intensityPoints[r.intensity] || 0), 0);
+                    records.intensity = maxIntensity; 
+                    
+                    if (lastDate && isConsecutive(lastDate, dateKey)) {
+                        consecutiveDays++;
+                        records.bonus = 2; 
+                    } else {
+                        consecutiveDays = 0;
+                    }
+                    lastDate = dateKey;
+                    // totalScore += records.base + records.intensity + records.bonus; // ★削除: スコア加算
+                }
+                
+                // --- 2. 総瞑想時間のスコア計算 ---
+                let totalSeconds = meditationRecords.reduce((sum, r) => sum + (r.duration || 0), 0);
+                // totalScore += Math.floor(totalSeconds / 120); // ★削除: スコア加算
+
+                // --- 3. 思考変換トレーニングのスコア計算 ---
+                const mindDays = new Set();
+                mindRecords.forEach(r => {
+                    const dateKey = toYMD(r.date);
+                    if (mindDays.has(dateKey)) { return; }
+
+                    let dayScore = 7;
+                    // const assessmentKey = r.thoughtAssessment; // ★削除: thoughtAssessmentの利用
+                    // const assessmentScore = thoughtAssessmentPoints[assessmentKey] || 0; // ★削除: 評価スコアの計算
+                    // dayScore += assessmentScore;
+                    
+                    // totalScore += dayScore; // ★削除: スコア加算
+                    mindDays.add(dateKey);
+                });
+
+                // --- 4. 幸福招き猫の画像更新 ---
+                // ★削除: 関連するDOM操作ロジックを削除
+                
+                // --- 5. その他のダッシュボード反映 ---
+                const totalMindRecords = mindRecords.length;
+                document.getElementById('totalMindRecords').textContent = `${totalMindRecords}回`;
+
+                // 記録カレンダーの描画
+                generateRecordCalendar(allUserRecords); 
+
+            // ------------------------------------
+            // 使い方モーダル機能
+            // ------------------------------------
+            const howToUseButton = document.getElementById('howToUseButton');
+            const howToUseModal = document.getElementById('howToUseModal');
+            const closeButton = howToUseModal.querySelector('.close-button');
+
+            if (howToUseButton && howToUseModal) {
+                howToUseButton.addEventListener('click', () => {
+                    howToUseModal.style.display = 'block';
+                });
+                closeButton.addEventListener('click', () => {
+                    howToUseModal.style.display = 'none';
+                });
+                window.addEventListener('click', (event) => {
+                    if (event.target == howToUseModal) {
+                        howToUseModal.style.display = 'none';
+                    }
+                });
+            }
+
+
+            } // end of updateDashboard
+
+            // 以前のロジック: 認証トークンがあれば、ダッシュボードの更新に進む
+            await updateDashboard();
+
+        });
+        
+    </script>
+</body>
+</html>

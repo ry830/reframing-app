@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レジリエンス・コンパス - ポジティブ日記</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+    /* Milligramのselect要素のスタイルを維持しつつ、見た目を改善 */
+    select {
+        /* デフォルトの Milligram スタイルを再適用 (通常は外部ファイルから適用される) */
+        color: #555; /* テキストを濃くする */
+        background-color: #fcfcfc; /* 背景色を明確にする */
+        border: 1px solid #d1d1d1;
+        padding: 0.5em 1em; /* パディングを調整 */
+        height: 38px; /* Milligramの標準的な高さ */
+        box-shadow: none;
+    }
+
+    /* ユーザーが選択肢を変更した際に、テキストが変化するように調整 */
+    select option {
+        color: #333; /* オプションテキストの色を濃くする */
+        background-color: white; /* オプションの背景色を白にする */
+    }
+
+    /* フォーカス時の色を Milligram のデフォルトに近いものに戻すか、明確にする */
+    select:focus {
+        border-color: #9b4dca; /* Milligram のデフォルト色 */
+        outline: 0;
+    }
+
+    /* 選択肢の上部の「選択してください」のオプションを非表示にすることも可能ですが、今回はデザイン統一のため維持 */
+    #originSelect option[value=""] 
+</style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✨ ポジティブ日記（運の充電）</h1>
+        </header>
+
+        <main class="main-content">
+            
+            <div id="step-1" class="step-container">
+                <h3>今日の運を記録しよう</h3>
+                <p>今日あった、**嬉しかった出来事**や**感謝していること**を自由に記録してみましょう。この出来事は、あなたの『運の充電池』に繋がります。</p>
+                
+                <fieldset>
+                    <label for="positiveFactTextarea">1. 具体的な出来事を記録</label>
+                    <textarea id="positiveFactTextarea" rows="4" placeholder="例: 欲しかった本を偶然セールで見つけた。/同僚が手伝ってくれて仕事が早く終わった。"></textarea>
+                </fieldset>
+                
+                <fieldset>
+                    <label for="originSelect">2. この出来事は、主にどちらが原因だと思いますか？</label>
+                    <select id="originSelect">
+                        <option value="">選択してください</option>
+                        <option value="effort">自分の努力・行動が原因（自己効力感）</option>
+                        <option value="luck">偶然や、他者からの助けが原因（運資源ビリーフ）</option>
+                    </select>
+                </fieldset>
+
+                <fieldset>
+                    <label for="intensitySelect">3. この出来事によるポジティブな気持ちの強さは？</label>
+                    <select id="intensitySelect">
+                        <option value="low">小</option>
+                        <option value="medium" selected>中</option>
+                        <option value="high">大</option>
+                    </select>
+                </fieldset>
+                
+                <button class="button-primary" id="savePositiveDiaryButton" style="background-color: #2ecc71;">記録を完了し、保存する</button>
+            </div>
+
+            <a href="index.html" class="back-to-home">トップに戻る</a>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="positive-script.js"></script>
+</body>
+</html>

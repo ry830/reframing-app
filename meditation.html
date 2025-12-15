@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レジリエンス・コンパス - 瞑想トレーニング</title>
+    
+<link rel="stylesheet" href="style.css"> 
+<style>
+        /* ★★★ 修正箇所 ★★★ */
+    /* 全画面をカバーする基本設定 */
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        /* height: 100%; <- これを削除 */
+        min-height: 100vh; /* ★修正: 少なくともビューポートの高さは確保し、必要なら広がる */
+        overflow-x: hidden; /* ★修正: 横方向のスクロールは禁止 */
+        overflow-y: auto; /* ★修正: 縦方向は必要に応じてスクロールを許可 */
+        font-family: -apple-system, BlinkMacMacFont, "Segoe UI", Roboto, sans-serif;
+        color: #ecf0f1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background-image 1.5s ease-in-out, background-color 1.5s ease-in-out;
+        background-color: #2c3e50;
+        background-image: none;
+    }
+    
+    /* 瞑想中の背景クラス */
+    body.is-meditating {
+        background-image: url('meditation-bg.jpg');
+        background-size: cover;
+        background-position: center;
+        background-color: #000;
+    }
+
+    /* コンテナのスタイル（全てのコンテンツをラップする） */
+    .meditation-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* 修正: 中央寄せを維持 */
+        align-items: center;
+        width: 100%;
+        min-height: 100vh; /* ★修正: wrapperもビューポートの高さを確保 */
+        padding: 40px 20px; /* 上下のパディングを追加し、画面端とコンテンツの間に余裕を持たせる */
+        box-sizing: border-box; /* パディングを含めてサイズ計算 */
+        background-color: transparent; 
+        transition: background-color 0.5s ease-in-out;
+    }
+
+        /* 瞑想中のwrapperスタイル */
+        body.is-meditating .meditation-wrapper {
+            background-color: transparent;
+        }
+
+        /* 各要素のスタイル */
+        h1, h2, p, button, select, label {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: #ecf0f1;
+        }
+
+        /* タイマー表示 */
+        #timer {
+            font-size: 6rem;
+            font-weight: 700;
+            margin: 20px 0;
+            color: #ecf0f1;
+            transition: opacity 0.5s;
+        }
+
+        /* ボタンのスタイル */
+        .timer-button {
+            margin: 10px;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.5s;
+            border: none;
+            background-color: rgba(156, 39, 176, 0.7);
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .timer-button:hover {
+            background-color: rgba(156, 39, 176, 0.9);
+            transform: translateY(-2px);
+        }
+        #stopButton {
+            background-color: rgba(243, 156, 18, 0.7);
+        }
+        #stopButton:hover {
+            background-color: rgba(243, 156, 18, 0.9);
+        }
+        #recordForm button {
+            background-color: rgba(46, 204, 113, 0.7);
+        }
+        #recordForm button:hover {
+            background-color: rgba(46, 204, 113, 0.9);
+        }
+        .back-to-home-meditation { /* ★新しく追加するボタンのスタイル★ */
+            background-color: rgba(119, 119, 119, 0.5); /* グレーの半透明 */
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .back-to-home-meditation:hover {
+            background-color: rgba(119, 119, 119, 0.7);
+        }
+
+
+        /* コンテナの表示/非表示 */
+        #startContainer, #stopContainer, #recordContainer {
+            background-color: transparent;
+            padding: 20px;
+            border-radius: 10px;
+            transition: opacity 0.5s;
+        }
+        
+        /* 記録フォームのスタイル調整 */
+        #recordForm {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 20px;
+            text-align: center;
+        }
+        #recordForm label, #recordForm select {
+            color: #ecf0f1;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            width: auto;
+        }
+
+        /* durationSelect に mindsetState と同じ外観を適用 */
+#durationSelect {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: #ecf0f1;
+    padding: 8px;
+    border-radius: 5px;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23ecf0f1" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px top 50%;
+    background-size: 16px 16px;
+    /* width: auto; */ /* 必要に応じて幅を指定 */
+}
+
+/* durationSelect のオプションの背景色も mindsetState と統一 */
+#durationSelect option {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+}
+
+        #mindsetState {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: #ecf0f1;
+            padding: 8px;
+            border-radius: 5px;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%23ecf0f1" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 8px top 50%;
+            background-size: 16px 16px;
+        }
+        #mindsetState option {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+
+
+        .completion-message {
+            color: #ecf0f1;
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        .back-to-home { /* 既存のトップに戻るリンクは今回は使用しない */
+            display: none;
+        }
+
+        /* 瞑想中のdescriptionを隠す */
+        body.is-meditating .meditation-description {
+            display: none;
+        }
+        body.is-meditating #stopContainer {
+            margin-top: 80px; /* タイマーからボタンまでの間隔を空ける */
+        }
+        /* 瞑想中はタイトルとホームボタンを隠す */
+        body.is-meditating h1, body.is-meditating .back-to-home-meditation {
+            display: none !important; 
+        }
+
+        /* タイトルは常に表示 */
+        h1 {
+            color: #ecf0f1;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="meditation-wrapper">
+        <h1>🧘 瞑想トレーニング</h1>
+        <h2 id="timer">5:00</h2>
+        
+        <div id="startContainer">
+            <label for="durationSelect">目標時間 (分):</label>
+            <select id="durationSelect">
+                <option value="1">1分</option>
+                <option value="3">3分</option>
+                <option value="5" selected>5分</option>
+                <option value="10">10分</option> </select>
+            <button id="startButton" class="timer-button">瞑想開始</button>
+            <p class="meditation-description">目を閉じ、深く息を吸い、ゆっくりと吐き出しましょう。<br>自分の呼吸だけに意識を集中させてください。</p>
+        </div>
+
+        <div id="stopContainer" style="display:none;">
+            <button id="stopButton" class="timer-button">中断・終了</button>
+        </div>
+
+        <div id="recordContainer" style="display:none;">
+            <p class="completion-message">お疲れ様でした！記録を保存しましょう。</p>
+            <form id="recordForm">
+                <label for="mindsetState">瞑想後の心の状態:</label>
+                <select id="mindsetState" required>
+                    <option value="very_calm">非常に穏やか</option>
+                    <option value="calm" selected>穏やか</option>
+                    <option value="normal">普通</option>
+                    <option value="restless">少し落ち着かない</option>
+                    <option value="very_restless">非常に落ち着かない</option>
+                </select>
+                
+                <button type="submit" class="timer-button">記録を保存</button>
+            </form>
+        </div>
+        
+        <a href="index.html" class="back-to-home-meditation">トップに戻る</a>
+        </div>
+    
+    <script src="script.js"></script>
+    <script src="meditation-script.js"></script>
+    
+    <audio id="meditationBGM" loop>
+        <source src="relaxing_music.mp3" type="audio/mpeg"> 
+        お使いのブラウザは音声要素をサポートしていません。
+    </audio>
+</body>
+</html>

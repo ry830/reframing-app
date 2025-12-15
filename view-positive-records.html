@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レジリエンス・コンパス - ポジティブ日記の記録</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ポジティブ日記専用のスタイル */
+        .positive-view-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .positive-view-container h1 {
+            color: #2ecc71; /* Green accent */
+            text-align: center;
+        }
+        .record-list-item {
+            padding: 20px;
+            background-color: #f7fff7;
+            border-left: 5px solid #2ecc71;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        .record-list-item h4 {
+            color: #388e3c;
+            margin-top: 0;
+            font-size: 1.2rem;
+        }
+        .record-list-item .meta-info {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 10px;
+        }
+        .delete-button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="positive-view-container">
+        <header>
+            <h1>🌟 ポジティブ日記の記録</h1>
+        </header>
+
+        <main class="main-content">
+            <ul id="positiveRecordList" style="list-style: none; padding: 0;">
+                </ul>
+            
+            <a href="#" id="clearAll" style="color: #e74c3c; margin-top: 10px; display: block; text-align: center;">すべての記録を削除</a>
+
+            <a href="index.html" class="back-to-home">トップに戻る</a>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="view-positive-script.js"></script>
+</body>
+</html>

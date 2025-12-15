@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心のレコーダー</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .mind-view-container {
+            width: 90%;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .mind-view-container h1 {
+            font-size: 24px;
+            color: #3498db;
+            text-align: center;
+        }
+        .mind-record-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        .mind-record-item {
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border-left: 5px solid #3498db;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .mind-record-item .date {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        .back-to-home {
+            display: block;
+            margin-top: 20px;
+            color: #555;
+            text-decoration: none;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mind-view-container">
+        <h1>心の記録</h1>
+        <ul id="mindRecordList" class="mind-record-list">
+    </ul>
+<a href="index.html" class="back-to-home">トップに戻る</a>
+<a href="#" class="back-to-home" id="clearAll" style="color: #e74c3c;">すべての記録を削除</a>
+    </div>
+
+    <script src="view-mind-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レジリエンス向上のお部屋 - ログイン/登録</title>
+    
+    <link rel="stylesheet" href="style.css"> 
+    
+    <style>
+        /* 共通の背景とコンテナのスタイルを適用 */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacMacFont, "Segoe UI", Roboto, sans-serif;
+            color: #ecf0f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #2c3e50;
+        }
+
+        /* フォームを囲むメインコンテナ */
+        .auth-container {
+            background-color: rgba(39, 57, 74, 0.9); /* 濃い背景色 */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 350px;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ecf0f1;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* フォームの共通スタイル */
+        .auth-form input[type="text"],
+        .auth-form input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #34495e;
+            border-radius: 8px;
+            box-sizing: border-box;
+            background-color: #34495e;
+            color: #ecf0f1;
+            font-size: 1rem;
+        }
+        .auth-form input::placeholder {
+            color: #bdc3c7;
+            opacity: 0.7;
+        }
+        
+        /* ボタンの共通スタイル */
+        .auth-button {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* ログイン/登録ボタン */
+        #loginButton, #registerButton {
+            background-color: #9b59b6; /* 紫 */
+            color: white;
+            margin-bottom: 15px;
+        }
+        #loginButton:hover, #registerButton:hover {
+            background-color: #8e44ad;
+        }
+
+        /* フォーム切り替えリンク */
+        .switch-link {
+            color: #bdc3c7;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .switch-link:hover {
+            color: #ecf0f1;
+        }
+
+        /* エラーメッセージ */
+        #errorMessage {
+            color: #e74c3c;
+            margin-bottom: 15px;
+            min-height: 20px;
+            font-weight: bold;
+        }
+        
+        /* フォームの切り替えアニメーション */
+        .form-container {
+            transition: opacity 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <h1 id="authTitle">ユーザーログイン</h1>
+        
+        <div id="errorMessage"></div>
+
+        <div id="loginFormContainer" class="form-container">
+            <form id="loginForm" class="auth-form">
+                <input type="text" id="loginUserId" placeholder="ユーザーID (匿名ID)" required>
+                <input type="password" id="loginPassword" placeholder="パスワード" required>
+                <button type="submit" id="loginButton" class="auth-button">ログイン</button>
+            </form>
+            <p>
+                <a href="#" id="showRegisterLink" class="switch-link">アカウントをお持ちでない方（新規登録へ）</a>
+            </p>
+        </div>
+
+        <div id="registerFormContainer" class="form-container" style="display:none;">
+            <form id="registerForm" class="auth-form">
+                <input type="text" id="registerUserId" placeholder="ユーザーID (匿名ID)" required>
+                <input type="password" id="registerPassword" placeholder="パスワード" required>
+                <button type="submit" id="registerButton" class="auth-button">新規登録</button>
+            </form>
+            <p>
+                <a href="#" id="showLoginLink" class="switch-link">ログイン画面に戻る</a>
+            </p>
+        </div>
+    </div>
+    
+    <script src="auth-script.js"></script>
+</body>
+</html>

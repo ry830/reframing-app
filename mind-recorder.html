@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レジリエンス向上リフレーミング</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Step-by-step container */
+        .step-container {
+            padding: 30px 20px;
+            border: 1px solid #ddd;
+            border-radius: 12px; /* ★修正: 角を丸く */
+            background-color: #ffffff; /* ★修正: 背景を白に */
+            margin-bottom: 25px; /* ★修正: 間隔を少し広げる */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* ★修正: 軽めのシャドウ */
+        }
+        .step-container h3 {
+            border-bottom: 2px solid #a5d6a7; /* ★修正: 柔らかい緑のボーダー */
+            padding-bottom: 8px; /* ★修正: パディングを増やす */
+            margin-bottom: 20px; /* ★修正: 間隔を広げる */
+            color: #4CAF50; /* ★修正: 優しい緑色 */
+            font-weight: 500;
+        }
+        /* Textareas & Selects */
+        textarea, select {
+            width: 100%;
+            border-radius: 8px; /* ★修正: 角を丸く */
+            border: 1px solid #c5e1a5; /* ★修正: 柔らかい緑の枠線 */
+            padding: 12px; /* ★修正: パディングを増やす */
+            box-shadow: none;
+            background-color: #f9fbe7; /* ★修正: 非常に薄い黄緑の背景 */
+        }
+        textarea:focus, select:focus {
+            border-color: #8bc34a; /* ★修正: フォーカス時の色 */
+            box-shadow: 0 0 8px rgba(139, 195, 74, 0.4); /* ★修正: フォーカス時のシャドウ */
+        }
+        /* Hint Button Styling */
+        .hint-button {
+            background-color: #FFD54F; 
+        color: #616161; 
+        border: none;
+        padding: 10px 22px; 
+        border-radius: 25px; 
+        font-size: 1.2rem; /* ★修正: ヒントボタンの文字サイズを大きく */
+        cursor: pointer;
+        margin-left: 10px;
+            transition: all 0.3s ease; /* ★修正: 滑らかなトランジション */
+            float: right; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* ★修正: 軽いシャドウ */
+        }
+        .hint-button:hover {
+            background-color: #FFA726; /* ★修正: ホバー時の色 */
+            transform: translateY(-1px); /* ★修正: 少し浮き上がる */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* ★修正: シャドウを濃く */
+        }
+        .label-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px; /* ★修正: 間隔を広げる */
+        }
+        .label-group label {
+            font-weight: 500; /* 太字 */
+            color: #555; /* 濃いグレー */
+            margin-bottom: 0;
+            font-size: 1.05rem; /* ★修正: ラベルのフォントサイズ */
+        }
+
+        /* Feedback Area */
+        #aiFeedbackArea {
+            background-color: #fff8e1; /* ★修正: 非常に薄い黄色 */
+            border: 2px solid #ffe082; /* ★修正: 明るい黄色の枠線 */
+            margin-top: 20px; /* ★修正: 間隔を広げる */
+            margin-bottom: 20px;
+            padding: 20px; /* ★修正: パディングを増やす */
+            border-radius: 12px; /* ★修正: 角を丸く */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* ★修正: 軽いシャドウ */
+        }
+        #aiFeedbackArea h4 {
+            color: #fbc02d; /* ★修正: 黄色っぽいオレンジ */
+            font-size: 1.2rem; /* ★修正: タイトルサイズ調整 */
+        }
+        #summaryArea {
+            border: 1px dashed #a5d6a7; /* ★修正: 柔らかい緑の点線 */
+            background-color: #f1f8e9; /* ★修正: 非常に薄い緑の背景 */
+            padding: 25px; /* ★修正: パディングを増やす */
+            border-radius: 10px; /* ★修正: 角を丸く */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>リフレーミングトレーニング</h1>
+            <p>ネガティブな出来事をポジティブに考え、レジリエンス力を育てます💪</p>     
+        <button id="showInstructionButton" class="button" style="background-color: #f39c12; border-color: #f39c12; font-size: 0.9rem; margin-bottom: 20px;">
+        トレーニングの目的と使い方
+    </button>
+        </header>
+
+        <main class="main-content">
+            
+            <div id="step-1" class="step-container">
+                <h3>ステップ1：出来事の記録 </h3>
+                <p>最近あった嫌な出来事や、運の悪かった出来事、不安な出来事などの<span style="color: red;">ネガティブな出来事</span>を、感情抜きで事実だけを淡々と記録してみましょう。（例: プレゼンで失敗し、上司に厳しく注意された。）</p>
+                <fieldset>
+                    <textarea id="factTextarea" rows="3" placeholder="出来事を客観的に記録"></textarea>
+                </fieldset>
+                <button class="button-primary" id="nextStep1Button">次のステップへ</button>
+            </div>
+            
+            <div id="step-2" style="display: none;" class="step-container">
+                <h3>ステップ2：思考のクセ分析</h3>
+                <p>その出来事に対し、どんな感情が湧きましたか？その根源にある「思考のクセ」を考えてみましょう。</p>
+                
+                <fieldset>
+    <label for="emotionTextarea">1. 湧き出た感情（例: 悔しい、情けない）</label>
+    <textarea id="emotionTextarea" rows="2" placeholder="感じた感情を正直に"></textarea>
+</fieldset>
+                
+                <fieldset>
+                    <div class="label">
+                        <label for="rootThoughtTextarea">2. 思考のクセ</label>
+                        <button class="hint-button" id="showCognitiveDistortionHint">💡思考のクセのヒント</button>
+                    </div>
+                    <textarea id="rootThoughtTextarea" rows="3" placeholder="例：1回の失敗で全てが決まる。"></textarea>
+                </fieldset>
+
+                <button class="button-primary" id="nextStep2Button">次のステップへ</button>
+            </div>
+
+            <div id="aiFeedbackArea" style="display: none;">
+                <h4 style="color: #fbc02d; margin-top: 0;">🤖 AIからのフィードバック</h4>
+                <p id="aiFeedbackText" style="margin-bottom: 0;"></p>
+                <p style="font-size: 0.9em; color: #fbc02d; margin-top: 10px;">(このアドバイスを参考に、リフレーミングを進めましょう)</p>
+            </div>
+
+
+            <div id="step-3" style="display: none;" class="step-container">
+                <h3>ステップ3：強みへの変換</h3>
+                <p>この出来事を、未来のあなたにとっての『強み』になるようにリフレーミングしていきましょう！</p>
+                
+                <fieldset>
+                    <div class="label-group">
+                        <label for="skillAnswer">1. 今回の出来事が、あなたの何らかの『スキル』に変わるとしたら、それはどんなスキルですか？</label>
+                        <button class="hint-button" id="hintSkillButton">💡「スキル」のヒント</button>
+                    </div>
+                    <textarea id="skillAnswer" rows="3" placeholder="ヒントはページ上部に表示されます"></textarea>
+                </fieldset>
+
+                <fieldset>
+                    <div class="label-group">
+                        <label for="relationshipAnswer">2. 今回の出来事のおかげで、あなたの『人間関係』が広がるとしたら、それはどんなことですか？</label>
+                        <button class="hint-button" id="hintRelationshipButton">💡「人間関係」のヒント</button>
+                    </div>
+                    <textarea id="relationshipAnswer" rows="3" placeholder="ヒントはページ上部に表示されます"></textarea>
+                </fieldset>
+
+                <fieldset>
+                    <div class="label-group">
+                        <label for="lessonAnswer">3. 今回の出来事が、あなたの人生の『教訓』になるとしたら、それはどんな教訓ですか？</label>
+                        <button class="hint-button" id="hintLessonButton">💡「教訓」のヒント</button>
+                    </div>
+                    <textarea id="lessonAnswer" rows="3" placeholder="ヒントはページ上部に表示されます"></textarea>
+                </fieldset>
+
+                <button class="button-primary" id="nextStep3Button">最終確認へ</button>
+            </div>
+            
+            <div id="step-4" style="display: none;" class="step-container">
+                <h3>ステップ4：記録の最終確認</h3>
+                <p>あなたが変換した思考を読み返し、再認識してみましょう。</p>
+
+                <div id="summaryArea" class="step-container" style="text-align: left; background-color: #fff; padding: 20px;">
+                    </div>
+
+                <button class="button-primary" id="finishButton">記録を完了し、保存する</button>
+            </div>
+
+            <div id="step-5" style="display: none; text-align: center; padding: 30px;">
+                <h3 style="color: #27ae60; border-bottom: 2px solid #a5d6a7; padding-bottom: 8px; margin-bottom: 20px;">✨ トレーニング完了：AI総評 ✨</h3>
+                <div id="summaryDisplay" style="padding: 25px; border: 2px solid #c8e6c9; border-radius: 12px; background-color: #e8f5e9; box-shadow: 0 4px 10px rgba(0,0,0,0.08);">
+                    <p id="aiSummaryText" style="font-style: italic; color: #388e3c; font-size: 1.15rem; line-height: 1.8;">AIがあなたの努力を評価中です... しばらくお待ちください。</p>
+                </div>
+                <p style="margin-top: 30px; font-size: 1.1rem; color: #666;">お疲れ様でした。今回の学びを次に活かしましょう。</p>
+
+                <div style="margin-top: 25px;">
+                    <button class="button-primary" id="goToTopButton" style="background-color: #64b5f6; border-color: #64b5f6; margin-right: 15px;">🏠 トップ画面に戻る</button>
+                </div>
+            </div>
+
+            <div id="instructionModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeModalButton">&times;</span>
+            <h3>🧠 リフレーミングトレーニングの目的と使い方</h3>
+            
+            <h4 style="color: #2c3e50; margin-top: 25px;"> 目的</h4>
+            <p>日常生活でネガティブな場面に遭遇した際に、思考をポジティブに変えていくためのトレーニングを行います。</p><p>ネガティブの元となる思考のクセを矯正し、ネガティブな出来事が未来のあなたへの強みとなるよう思考プロセスを変換します。これを繰り返してネガティブな考え方のクセを矯正し、最終的に心の回復力（レジリエンス）を高めることを目的としています。</p>
+
+            <h4 style="color: #2c3e50; margin-top: 25px;"> 使い方</h4>
+            <p>【指示に沿って入力を行ってください、入力文字数に制限はありません。
+            ※次のページへいってもこの使い方画面は閲覧できます。】
+            <p>STEP1. 出来事の記録 : 起こった出来事を、感情を入れずに客観的な事実のみを淡々と記録してください。</p>
+            <p>STEP2. 思考のクセ分析 : 1.感情を自由にありのままに書いてください。2.その感情になってしまう原因=思考のクセを考えてみましょう。難しい場合はヒントを活用しましょう。</p>
+            <p>STEP3. 強みへの変換 : 失敗や困難をネガティブと捉えるのではなく、思考を変えて「スキル」「人間関係」「教訓」という3つの強みに変換しましょう。難しい場合はAIのヒントを活用しましょう。</p>
+            <p>全て入力し終わったら、最終確認へ進みましょう。最後にAIからフィードバックをもらえます！</p>
+
+            <p style="text-align: right; font-style: italic; color: #888; margin-top: 20px;">あなたの成長を応援しています！</p>
+        </div>
+    </div>
+
+            <a href="index.html" class="back-to-home">トップに戻る</a>
+        </main>
+    </div>
+
+    <script src="script.js"></script> 
+    <script src="mind-script.js"></script>
+
+    <div id="cognitiveDistortionModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <span class="close-button" id="closeCognitiveDistortionModalButton">&times;</span>
+            <h3 style="color: #9c27b0;">🤔 思考のクセのヒント</h3>
+            
+            <p>あなたの感情を最も強く引き起こしている「考え方のパターン」を探してみましょう。</p>
+
+            <div style="height: 400px; overflow-y: scroll; padding-right: 15px; border: 1px solid #eee; border-radius: 8px; background-color: #fcfcfc;">
+                <table style="width: 100%; border-collapse: collapse; margin-top: 15px; table-layout: fixed;">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%; background-color: #f3e5f5; color: #4a148c; padding: 10px; font-size: 1.1rem; border-bottom: 2px solid #ce93d8;">パターン</th>
+                            <th style="width: 70%; background-color: #f3e5f5; color: #4a148c; padding: 10px; font-size: 1.1rem; border-bottom: 2px solid #ce93d8;">具体的な例と説明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+    <tr style="border-bottom: 1px solid #eee;">
+        <td style="font-weight: bold; padding: 10px; color: #333;">肯定的側面の否定</td>
+        <td style="padding: 10px;">
+            <span style="font-weight: bold; color: #e67e22;">その事実の「悪い部分」ばかりが気になり、良い部分を否定する。</span><br>
+            <strong style="font-weight: normal; color: #666;">例: 「褒められたことは無視して、上司に指摘された一つのことだけを何日も考える。」</strong>
+        </td>
+    </tr>
+    <tr style="border-bottom: 1px solid #eee;">
+        <td style="font-weight: bold; padding: 10px; color: #333;">二分化思考<br></td>
+        <td style="padding: 10px;">
+            <span style="font-weight: bold; color: #e67e22;">物事を正反対の二つ（「善か悪か」「成功か失敗か」「勝ちか負けか」）で判断してしまう思考のクセ。</span><br>
+            <strong style="font-weight: normal; color: #666;">例: 「少しでもミスをしたら、この企画は全て失敗だ。」</strong>
+        </td>
+    </tr>
+    <tr style="background-color: #fafafa; border-bottom: 1px solid #eee;">
+        <td style="font-weight: bold; padding: 10px; color: #333;">すべき思考</td>
+        <td style="padding: 10px;">
+            <span style="font-weight: bold; color: #e67e22;">自分や他人が「当然」「〜すべき」「〜ねばならない」という厳格なルールで縛る。</span><br>
+            <strong style="font-weight: normal; color: #666;">例: 「あれだけ勉強したのだから、良い点が取れて当然」</strong>
+        </td>
+    </tr>
+    <tr style="background-color: #fafafa; border-bottom: 1px solid #eee;">
+        <td style="font-weight: bold; padding: 10px; color: #333;">過剰な一般化</td>
+        <td style="padding: 10px;">
+            <span style="font-weight: bold; color: #e67e22;">一度か二度の出来事を根拠に、全てがそうだと結論づける。</span><br>
+            <strong style="font-weight: normal; color: #666;">例: 「Aくんという人と初めて会ったとき不機嫌だった。この人はずっと不機嫌なのだろう」</strong>
+        </td>
+    </tr>
+    <tr style="border-bottom: 1px solid #eee;">
+        <td style="font-weight: bold; padding: 10px; color: #333;">結論の飛躍</td>
+        <td style="padding: 10px;">
+            <span style="font-weight: bold; color: #e67e22;">根拠もないのに悪い結論を出す（読心や予言など）。</span><br>
+            <strong style="font-weight: normal; color: #666;">例: 「彼がメッセージの返信をしないのは、私を嫌いになったに違いない。」</strong>
+        </td>
+    </tr>
+    <tr style="background-color: #fafafa; border-bottom: 1px solid #eee;">
+        <td style="font-weight: bold; padding: 10px; color: #333;">劣等比較</td>
+        <td style="padding: 10px;">
+            <span style="font-weight: bold; color: #e67e22;">ある人の「優れた一部分」だけを見て、比較してしまう考え方のクセ</span><br>
+            <strong style="font-weight: normal; color: #666;">例: 「Aくんは運動も勉強も容姿も完璧でずるいなあ。」</strong>
+        </td>
+    </tr>
+    <tr style="background-color: #fafafa; border-bottom: 1px solid #eee;">
+        <td style="font-weight: bold; padding: 10px; color: #333;">他者評価の全面的受け入れ</td>
+        <td style="padding: 10px;">
+            <span style="font-weight: bold; color: #e67e22;">他者の言うことを、全て真に受けてしまうこと。</span><br>
+            <strong style="font-weight: normal; color: #666;">例: 「親からの言葉を気にして、本来やりたいことが出来なくなってしまった。」</strong>
+        </td>
+    </tr>
+    
+    </tr>
+    <tr style="background-color: #fafafa;">
+        <td style="font-weight: bold; padding: 10px; color: #333;">等</td>
+        <td style="padding: 10px;">
+            <span style="font-weight: bold; color: #e67e22;">・・・</span><br>
+            <strong style="font-weight: normal; color: #666;"></strong>
+        </td>
+    </tr>
+</tbody>
+                </table>
+            </div>
+
+            <button class="button-primary close-button" style="float: none; margin-top: 20px; background-color: #9c27b0; border-color: #9c27b0;" id="closeCognitiveDistortionModalButton2">閉じる</button>
+        </div>
+    </div>
+
+
+</body>
+</html>

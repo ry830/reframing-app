@@ -1,0 +1,455 @@
+/* MilligramベースのカスタムCSS */
+
+/* --- GENERAL STYLES --- */
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    background-color: #f0f4f8; /* Light blue-grey background */
+}
+
+/* --- CONTAINER & HEADER --- */
+.container {
+    max-width: 900px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+header h1 {
+    color: #3f51b5; /* Milligram primary color */
+    border-bottom: 3px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+/* --- STEP CONTAINERS --- */
+/* (Step-container class is defined in the HTML <style> tag for immediate effect) */
+
+/* --- INPUTS & TEXTAREAS --- */
+textarea, select, input[type="text"] {
+    font-size: 1rem;
+    padding: 10px;
+    border: 1px solid #bdbdbd;
+    transition: border-color 0.3s;
+}
+textarea:focus, select:focus, input[type="text"]:focus {
+    border-color: #3f51b5;
+    box-shadow: 0 0 5px rgba(63, 81, 181, 0.3);
+}
+
+/* --- BUTTONS --- */
+.button-primary {
+    background-color: #3f51b5;
+    border-color: #3f51b5;
+    transition: background-color 0.3s, transform 0.1s;
+    font-weight: 500;
+}
+.button-primary:hover {
+    background-color: #303f9f;
+    border-color: #303f9f;
+}
+
+/* --- HINT BUTTONS (Custom Class) --- */
+.hint-button {
+    background-color: #ff9800; /* Deep Orange */
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 20px; /* Pill shape */
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin-left: 10px; 
+    transition: background-color 0.3s;
+}
+.hint-button:hover {
+    background-color: #e65100;
+}
+
+/* --- BACK TO HOME --- */
+.back-to-home {
+    display: inline-block;
+    margin-top: 20px;
+    color: #3f51b5;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.back-to-home:hover {
+    text-decoration: underline;
+}
+
+/* --- AI FEEDBACK AREA --- */
+#aiFeedbackArea {
+    /* Styles are defined inline in HTML for immediate visibility */
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Custom button color for final actions */
+#finishButton {
+    background-color: #4caf50;
+    border-color: #4caf50;
+}
+#finishButton:hover {
+    background-color: #388e3c;
+    border-color: #388e3c;
+}
+
+
+
+/* --- INPUTS & TEXTAREAS (フォームの文字サイズを最大化) --- */
+textarea, select, input[type="text"] {
+    font-size: 1.6rem; /* ★修正: 入力欄のフォントサイズをさらに大きく (1.5rem -> 1.6rem) */
+    font-weight: 400; 
+    padding: 18px; 
+    border: 1px solid #FFCC80; 
+    border-radius: 10px; 
+    background-color: #fffde7; 
+    transition: all 0.3s ease;
+}
+
+/* --- LABELS (質問文) --- */
+label {
+    font-weight: 500; /* ★修正: 太さを強調 */
+    color: #555; 
+    display: block; 
+    margin-bottom: 12px; 
+    font-size: 1.6rem; /* ★修正: ラベル（質問文）のフォントサイズを最大化 */
+}
+
+.label-group label {
+    margin-bottom: 0; 
+}
+
+/* --- HINT BUTTONS (Custom Class) --- */
+.hint-button {
+    background-color: #FFD54F; 
+    color: #616161; 
+    border: none;
+    padding: 10px 22px; 
+    border-radius: 25px; 
+    font-size: 1.2rem; /* ★修正: ヒントボタンの文字サイズを大きく */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+}
+
+/* --- AI FEEDBACK AREA --- */
+#aiFeedbackArea {
+    font-size: 1.5rem; /* 読みやすいサイズに固定 */
+    padding: 25px;
+    line-height: 1.6;
+}
+
+/* --- 🌟 振り返りページ（view-mind-records.html）の抑制 🌟 --- */
+/* 振り返り画面の文字サイズは抑制を維持 */
+#summaryArea p, 
+.mind-record-item div:not(.date):not(.actions) {
+    font-size: 1.6rem !important; /* 抑制サイズを少し上げて読みやすく */
+    line-height: 1.6;
+}
+#aiSummaryText {
+    font-size: 1.3rem; 
+    line-height: 1.8;
+}
+
+/* --- Custom button color for final actions --- */
+#finishButton {
+    font-size: 1.6rem; 
+}
+
+
+/* Step 3 質問文のフォントサイズを保証 */
+#step-3 label {
+    font-size: 1.6rem !important; /* ★修正: 優先度を上げて文字サイズを確保 */
+    font-weight: 500; 
+    line-height: 1.5; /* 質問文が読みやすくなるように行間を調整 */
+}
+
+/* 記録の振り返り画面のサイズ抑制がStep 3に影響しないように調整 */
+/* (Step 3の質問のフォントサイズは、他の抑制設定の影響を受けないようにします) */
+
+/* style.css の末尾に追加 */
+
+/* style.css の末尾に追加 */
+
+/* --- AI FEEDBACK AREA TEXT SIZE --- */
+#aiFeedbackArea p, 
+#aiFeedbackText {
+    font-size: 1.6rem !important; /* ★修正: 文字サイズを強制的に大きく (読みやすさ重視) */
+    line-height: 1.7;
+}
+
+#aiFeedbackArea h4 {
+    font-size: 1.7rem !important; /* タイトルサイズを大きく */
+}
+
+/* 応答メッセージ内の文字サイズを大きく */
+#aiFeedbackText strong, 
+#aiFeedbackText br {
+    font-size: 1.6rem !important;
+}
+
+/* style.css の末尾に追加 */
+
+/* --- STEP 5: AI総評のテキストサイズ --- */
+
+/* 1. 総評本文の文字サイズを強制的に拡大 */
+#aiSummaryText {
+    font-size: 1.5rem !important; /* ★修正: 総評テキストを読みやすいサイズに固定 (1.5rem) */
+    line-height: 1.8; /* 行間を広げ、読みやすく */
+}
+
+/* 2. 総評コンテナ内の一般的なテキストサイズも拡大 */
+#summaryDisplay p {
+    font-size: 1.8rem !important;
+    line-height: 1.7;
+}
+
+/* 3. 総評タイトルのサイズも調整 */
+#step-5 h3 {
+    font-size: 2.2rem; /* ステップタイトルを強調 */
+}
+
+/* style.css の末尾に追記 */
+
+/* --- 記録カレンダーのスタイル --- */
+.calendar-grid {
+    /* ★修正: 以前のHTMLではこのクラスが navContainer も含んでいたため発生。
+             現在は gridContainerにのみ適用されているため、このままでOK。
+             もし問題があれば、ここに display: grid を強制する。 */
+    display: grid; 
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-day {
+    padding: 5px 0;
+    text-align: center;
+    font-size: 0.8em;
+    border-radius: 4px;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+.calendar-header {
+    font-weight: bold;
+    background-color: #eee;
+    color: #666;
+    padding: 3px 0;
+}
+
+/* 週末の色 */
+.calendar-day.weekend {
+    color: #e74c3c; /* 赤系 */
+}
+
+/* 記録がある日のスタイル */
+.calendar-day.has-record {
+    background-color: #5cb85c; /* 緑色 */
+    color: white;
+    font-weight: bold;
+}
+
+/* 今日の日付のスタイル */
+.calendar-day.today {
+    border: 2px solid #3498db; /* 青枠 */
+    font-weight: bold;
+}
+
+
+/* --- 幸福招き猫のスタイル (基本) --- */
+.lucky-cat-stage {
+    /* 1. サイズは基本設定を維持 (220x240) */
+    width: 180px; 
+    height: 240px;
+    margin: 10px auto 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    /* 2. 角丸を削除または四角形に緩和 */
+    border-radius: 200px; /* 縦横比を柔軟にするため、50%を削除し角丸を適用 */
+    
+    border: 3px solid #ffcc80; 
+    transition: all 0.5s ease-in-out;
+    overflow: hidden; /* 画像がはみ出さないように */
+}
+
+/* --- 幸福招き猫のスタイル --- */
+/* ステージ 0: 横長 (240x135) */
+.lucky-cat-stage.stage-0 {
+    width: 310px; 
+    height: 209px; /* 横長にする */
+    background-image: url('cat_stage0.png');
+    /* 念のため、background-colorを設定して画像の上に重ねる */
+    background-color: #cac9c9;
+    opacity: 0.5;
+    border-color: #898484;
+}
+
+/* ステージ 1: 少し笑顔 / 15pt 達成 (横長 240x180) */
+.lucky-cat-stage.stage-1 {
+    width: 310px;
+    height: 209px; /* 横長にする */
+    background-image: url('cat_stage1.png');
+    opacity: 1;
+    border-color: #a5d6a7;
+}
+
+/* ステージ 2: 手を上げ始める / 30pt 達成 (縦長 200x260) */
+.lucky-cat-stage.stage-2 {
+    width: 208px;
+    height: 310px; /* 縦長にする */
+    background-image: url('cat_stage2.png');
+    border-color: #64b5f6;
+}
+
+/* ステージ 3: 満面の笑み / 45pt 達成 (縦長 210x280) */
+.lucky-cat-stage.stage-3 {
+    width: 208px;
+    height: 310px; /* 縦長にする */
+    background-image: url('cat_stage3.png');
+    border-color: #ff9800;
+    transform: scale(1.05); /* サイズは縦長で維持しつつ、少しだけ拡大 */
+}
+
+/* ステージ 4: 黄金の招き猫 / 65pt 達成 (縦長 220x300) */
+.lucky-cat-stage.stage-4 {
+    width: 208px;
+    height: 310px; /* 縦長にする */
+    background-image: url('cat_stage4.png');
+    border-color: #ffeb3b;
+    box-shadow: 0 0 15px #ffeb3b;
+}
+
+/* ステージ 5: 巨大な小判を持つ / 90pt 達成 (縦長 230x320) */
+.lucky-cat-stage.stage-5 {
+    width: 208px;
+    height: 310px;
+    background-image: url('cat_stage5.png');
+    border-color: #81c784;
+    box-shadow: 0 0 10px #81c784;
+    transform: scale(1.08) rotate(3deg);
+}
+
+/* ステージ 6: 光り輝く / 120pt 達成 (縦長 240x340) */
+.lucky-cat-stage.stage-6 {
+    width: 208px;
+    height: 310px;
+    background-image: url('cat_stage6.png');
+    border-color: #fdd835;
+    box-shadow: 0 0 20px #fdd835, 0 0 5px #fff inset;
+    filter: brightness(1.1);
+}
+
+/* ステージ 7: 究極の招き猫 / 150pt 達成 (縦長 250x360) */
+.lucky-cat-stage.stage-7 {
+    width: 208px;
+    height: 310px;
+    background-image: url('cat_stage7.png');
+    border-color: #e57373;
+    box-shadow: 0 0 30px #e57373, 0 0 10px #fff;
+    animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        box-shadow: 0 0 20px #e57373, 0 0 5px #fff;
+    }
+    to {
+        box-shadow: 0 0 40px #e57373, 0 0 15px #fff;
+    }
+}
+
+/* --- モーダルウィンドウの基本スタイル --- */
+.modal {
+    position: fixed;
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6); /* 背景を暗くする */
+    display: none; /* 初期状態では非表示 */
+    padding-top: 50px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 上下5%, 左右中央 */
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%; /* 画面幅の80%を使用 */
+    max-width: 700px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-content h3 {
+    color: #f39c12;
+    border-bottom: 2px solid #f9d99f;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 2rem; /* 文字サイズを大きく */
+}
+
+.modal-content p {
+    font-size: 1.2rem; /* 説明文の文字サイズを大きく */
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.modal-content strong {
+    color: #e67e22; /* 強調文字の色 */
+}
+
+/* 閉じるボタン */
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* style.css の末尾に追記 */
+
+/* 思考変換トレーニングの強調スタイル */
+.menu-item.green { 
+    background-color: #4caf50; 
+    /* デフォルトのフォントサイズを少し上げる */
+    font-size: 1.3rem; 
+    /* デフォルトのパディングを少し増やす */
+    padding: 25px;
+}
+
+/* 記録の振り返りの抑制スタイル */
+.menu-item.red { 
+    background-color: #f44336; 
+    /* デフォルトのフォントサイズを維持または少し下げる */
+    font-size: 1.0rem; 
+    /* デフォルトのパディングを維持または少し減らす */
+    padding: 18px;
+}
+
+/* アイコンを絵文字で表示するために、HTMLのicon spanにマージンを設定 */
+.menu-item .icon {
+    font-size: 2.2rem; /* アイコンのサイズを少し大きく */
+    margin-right: 15px;
+}
+
+/* 媒体クエリ: 画面幅が狭い場合は、ボタンを元のサイズに戻して縦に並べる */
+@media (max-width: 600px) {
+    .menu-item.green,
+    .menu-item.red {
+        padding: 20px !important;
+        font-size: 1.2rem !important;
+    }
+}
